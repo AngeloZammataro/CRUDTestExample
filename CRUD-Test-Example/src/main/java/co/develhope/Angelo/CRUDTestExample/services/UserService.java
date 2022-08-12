@@ -13,10 +13,10 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public void setUserActivationStatus(Long userId, boolean isActive){
+    public User setUserActivationStatus(Long userId, boolean isActive){
         Optional<User> user = userRepository.findById(userId);
-        if(user.isEmpty()) return;
+        if(user.isEmpty()) return null;
         user.get().setActive(isActive);
-        userRepository.save(user.get());
+        return userRepository.save(user.get());
     }
 }

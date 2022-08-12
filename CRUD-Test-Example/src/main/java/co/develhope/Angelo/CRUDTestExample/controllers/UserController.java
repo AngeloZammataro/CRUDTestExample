@@ -47,15 +47,15 @@ public class UserController {
 
     //UPDATE single user
     @PutMapping("/{id}")
-    public void update(@PathVariable long id,@RequestBody @NotNull User user){
+    public @ResponseBody User update(@PathVariable long id,@RequestBody @NotNull User user){
         user.setId(id);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     //UPDATE single user
     @PutMapping("/{id}/activation")
-    public void setUserActive(@PathVariable long id, @RequestParam("activated") boolean activated){
-        userService.setUserActivationStatus(id,activated);
+    public @ResponseBody User setUserActive(@PathVariable long id, @RequestParam("activated") boolean activated){
+        return userService.setUserActivationStatus(id,activated);
     }
 
     //DELET all
